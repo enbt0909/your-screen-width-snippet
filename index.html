@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bildschirmbreite anzeigen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        #breite {
+            font-size: 1.5em;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            background-color: #fff;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Bildschirmbreite herausfinden</h1>
+<p id="breite">Bildschirmbreite: </p>
+
+<script>
+    // Funktion zum Anzeigen der Bildschirmbreite
+    function aktualisiereBildschirmbreite() {
+        const bildschirmBreite = window.innerWidth;
+        document.getElementById('breite').innerText = `Bildschirmbreite: ${bildschirmBreite}px`;
+    }
+
+    // Bildschirmbreite beim Laden anzeigen
+    aktualisiereBildschirmbreite();
+
+    // Bildschirmbreite bei Änderung des Fensters aktualisieren
+    window.addEventListener('resize', aktualisiereBildschirmbreite);
+</script>
+
+</body>
+</html>
