@@ -1,45 +1,67 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bildschirmbreite anzeigen</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: #fff;
-            text-align: center;
             margin: 0;
-            padding: 100px 20px;
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
+
+        p {
+            width: 100%;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             animation: fadeIn 1s;
         }
-        #breite {
-            font-size: 2em;
+
+        #width,
+        #height {
+            font-size: 1.2em;
             padding: 20px;
+            /* height: 50%; */
             border: 2px solid #fff;
             border-radius: 10px;
             background-color: rgba(255, 255, 255, 0.2);
-            display: inline-block;
             transition: transform 0.3s, background-color 0.3s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        #breite:hover {
-            transform: scale(1.1);
+
+        #width {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #height {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+        }
+
+        #width:hover,
+        #height:hover {
             background-color: rgba(255, 255, 255, 0.3);
         }
+
         .button {
-            margin-top: 20px;
+            margin: 20px;
             padding: 10px 20px;
             font-size: 1em;
             border: none;
@@ -48,53 +70,88 @@
             color: #fff;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            z-index: 999;
         }
+
         .button:hover {
-            background-color: #e84118;
             transform: translateY(-2px);
         }
+
+        .highlight {
+            position: absolute;
+            right: 0;
+            bottom: 100%;
+            width: 60%;
+            height: 100%;
+            transform: translateY(100%);
+            text-align: center;
+            transition: background-color 0.3s;
+            animation: fadeIn 1s;
+        }
+
+        .widthlight {
+            position: absolute;
+            right: 100%;
+            width: 40%;
+            height: 25%;
+            transform: translateX(100%);
+            text-align: center;
+            transition: background-color 0.3s;
+            animation: fadeIn 1s;
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 2em;
             }
+
             #breite {
                 font-size: 1.5em;
                 padding: 15px;
             }
+
             .button {
                 font-size: 0.9em;
             }
         }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
         }
     </style>
 </head>
+
 <body>
 
-<h1>Bildschirmbreite herausfinden</h1>
-<p id="breite">Bildschirmbreite: </p>
-<button class="button" onclick="aktualisiereBildschirmbreite()">Aktualisieren</button>
+    <p id="width">Die Bildschirmbreite</p>
+    <p id="height">Die Bildschirmhöhe</p>
+    <button class="button" onclick="updateWidth()">Breite</button>
+    <button class="button" onclick="updateHeight()">Höhe</button>
 
-<script>
-    // Funktion zum Anzeigen der Bildschirmbreite
-    function aktualisiereBildschirmbreite() {
-        const bildschirmBreite = window.innerWidth;
-        document.getElementById('breite').innerText = `Bildschirmbreite: ${bildschirmBreite}px`;
-    }
+    <script>
+        function updateWidth() {
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const widthElement = document.getElementById('width');
+            widthElement.innerText = `Bildschirmbreite: ${screenWidth}px`;
+            // widthElement.style.height = `${screenHeight}px`;
+            widthElement.classList.add('widthlight');
+        }
 
-    // Bildschirmbreite beim Laden anzeigen
-    aktualisiereBildschirmbreite();
-
-    // Bildschirmbreite bei Änderung des Fensters aktualisieren
-    window.addEventListener('resize', aktualisiereBildschirmbreite);
-</script>
+        function updateHeight() {
+            const screenHeight = window.innerHeight;
+            const heightElement = document.getElementById('height');
+            heightElement.innerText = `Bildschirmhöhe: ${screenHeight}px`;
+            heightElement.classList.add('highlight');
+        }
+    </script>
 
 </body>
-</html>
 
+</html>
